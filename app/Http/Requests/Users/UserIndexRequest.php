@@ -23,6 +23,7 @@ class UserIndexRequest extends FormRequest
             'last_name' => 'nullable|string',
             'phone' => 'nullable|string',
             'user_name' => 'nullable|string',
+            'date_of_birth' => 'nullable|date',
             'email' => 'nullable|string|email',
             'is_active' => 'nullable|boolean',
             'is_account_opened' => 'nullable|boolean',

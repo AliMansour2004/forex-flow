@@ -35,6 +35,7 @@ class UserFactory extends Factory
             'last_name' => $last_name,
             'phone' => $this->faker->unique()->phoneNumber,
             'user_name' => $first_name,
+            'date_of_birth' => $this->faker->date(),
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt($first_name), // Password is the first name
             'balance' => 0,

@@ -62,6 +62,10 @@ class UserStoreRequest extends FormRequest
                 'string',
                 Rule::unique('users', 'user_name'),
             ],
+            'date_of_birth' => [
+                'required',
+                'date_format:d-m-Y',
+            ],
             'password' => [
                 'required',
                 'string',

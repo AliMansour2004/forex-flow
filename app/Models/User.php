@@ -15,8 +15,20 @@ class User extends Authenticatable
     use Notifiable, HasFactory, HasApiTokens, HasRoles;
 
     protected $fillable = [
-        'parent_id', 'first_name', 'middle_name', 'last_name', 'phone', 'user_name', 'email', 'password',
-        'balance', 'is_active', 'is_our_tbroker_account_open', 'our_tbroker_server_name', 'our_tbroker_account_number'
+        'parent_id',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'phone',
+        'user_name',
+        'date_of_birth',
+        'email',
+        'password',
+        'balance',
+        'is_active',
+        'is_our_tbroker_account_open',
+        'our_tbroker_server_name',
+        'our_tbroker_account_number'
     ];
 
     protected $hidden = [
@@ -97,7 +109,7 @@ class User extends Authenticatable
         return $this->hasOne(CardPayment::class, 'user_id')->latestOfMany('finished_at');
     }
 
-    
+
 
 //    public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
 //    {

@@ -61,12 +61,14 @@ class UserController extends Controller
         $validated_request = $request->validated();
         $validated_request['password'] = Hash::make($validated_request['password']);
         $validated_request['added_by_user_id'] = Auth::id();
+        $date_of_birth = $validated_request['date_of_birth'] ?? null;
 
         $amount = $validated_request['amount'];
         $duration = $validated_request['duration'];
         $transaction_id = $validated_request['transaction_id'] ?? null;
         $discount = $validated_request['discount'] ?? null;
         $our_company_money_account_id = $validated_request['our_company_money_account_id'] ?? null;
+
 
         $fees = 0;
         if (!empty($validated_request['our_company_money_account_id'])) {
@@ -258,9 +260,13 @@ class UserController extends Controller
         }
     }
 
+
+
     public function destroy(User $user)
     {
         //
     }
+
+
 
 }

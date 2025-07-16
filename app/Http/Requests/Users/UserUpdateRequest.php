@@ -62,6 +62,10 @@ class UserUpdateRequest extends FormRequest
                 'string',
                 Rule::unique('users', 'user_name')->ignore($this->user),
             ],
+            'date_of_birth' => [
+                'required',
+                'date_format:d-m-Y',
+            ],
             'password' => [
                 'nullable',
                 'string',
