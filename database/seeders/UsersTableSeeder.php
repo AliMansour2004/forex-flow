@@ -54,7 +54,6 @@ class UsersTableSeeder extends Seeder
                         'user_id' => $user->id,
                         'added_by_user_id' => auth()->id(),
                         'finished_at' => null, // Adjust as needed
-                        'date_of_birth' => $faker->date(),
                     ]);
                     $this->createCardPayment($user->id, $broker->id, $faker);
                 });
