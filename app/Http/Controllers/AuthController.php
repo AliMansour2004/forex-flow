@@ -72,6 +72,7 @@ class AuthController extends Controller
                 'fullName' => $user->first_name . '' . $user->last_name,
                 'username' => $user->user_name,
                 'avatar' => '/images/avatars/avatar-1.png',
+                'date_of_birth' => $user->date_of_birth,
                 'email' => $user->email,
                 'role' => $user_role,
             ];
