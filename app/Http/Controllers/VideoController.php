@@ -20,11 +20,11 @@ class VideoController extends Controller
             ->pagingSearchData($request, new Video(), VideoResource::class);
     }
 
-//    public function store(VideoStoreRequest $request)
-//    {
-//        $video = Video::create($request->validated());
-//        return new VideoResource($video);
-//    }
+    public function store(VideoStoreRequest $request)
+    {
+        $video = Video::create($request->validated());
+        return new VideoResource($video);
+    }
 
     public function show(Video $video)
     {
