@@ -65,6 +65,7 @@ class UserUpdateRequest extends FormRequest
             'date_of_birth' => [
                 'required',
                 'date_format:d-m-Y',
+                'before:today',
             ],
             'password' => [
                 'nullable',

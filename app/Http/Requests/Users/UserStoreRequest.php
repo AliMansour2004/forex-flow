@@ -64,7 +64,8 @@ class UserStoreRequest extends FormRequest
             ],
             'date_of_birth' => [
                 'required',
-                'date_format:d-m-Y',
+                'date_format:Y-m-d',
+                'before:today'
             ],
             'password' => [
                 'required',
