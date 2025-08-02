@@ -34,21 +34,21 @@ class FunctionUtilities
 
                 $adminMessage = "Reminder:\n\nThe subscription for user {$user->first_name} {$user->last_name} (Email: {$user->email}) "
                     . "will end in 3 days on {$subscription->finished_at}.";
-                $this->sendEmail($adminMessage, 'admin@example.com', 'User Subscription Ending Soon');
+                $this->sendEmail($adminMessage, 'forexflowteam@gmail.com', 'User Subscription Ending Soon');
             }
         }
     }
 
     private function sendLastWarnings()
     {
-        $subscriptionsEndingToday = CardPayment::whereDate('finished_at', '=', Carbon::now())->get();
+        $subscriptionsEndingToday = CardPayment::whereDate('finished_at', '=',Carbon::tomorrow())->get();
 
         foreach ($subscriptionsEndingToday as $subscription) {
             $user = $subscription->user;
 
             if ($user) {
                 $userMessage = "Hello {$user->first_name} {$user->last_name},\n\n"
-                    . "This is your final reminder that your subscription ends today ({$subscription->finished_at}). "
+                    . "This is your final reminder that your subscription ends tomorrow ({$subscription->finished_at}). "
                     . "Please renew it as soon as possible to avoid any disruption in service.\n\n"
                     . "Thank you for being with us.\n\nBest Regards,\nYour Team";
 
@@ -56,7 +56,7 @@ class FunctionUtilities
 
                 $adminMessage = "Final Warning:\n\nThe subscription for user {$user->first_name} {$user->last_name} (Email: {$user->email}) "
                     . "ends today ({$subscription->finished_at}). Follow up if needed.";
-                $this->sendEmail($adminMessage, 'admin@example.com', 'Final Subscription Warning');
+                $this->sendEmail($adminMessage, 'forexflowteam@gmail.com', 'Final Subscription Warning');
             }
         }
     }
