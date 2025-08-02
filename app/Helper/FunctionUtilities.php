@@ -2,6 +2,7 @@
 
 namespace App\Helper;
 
+use App\Models\CardPayment;
 use App\Models\MemberSubscription;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -10,7 +11,7 @@ class FunctionUtilities
 {
     private function sendEmail($body_content, $email_address, $subject)
     {
-        Mail::raw($body_content, function ($msg) use ($email_address, $subject) {
+        Mail::raw($body_content, function ($msg) use ($email_address, $subject) {//raw() => sends a plain-text message (no HTML, no view).
             $msg->to($email_address)
                 ->subject($subject);
         });
@@ -18,7 +19,7 @@ class FunctionUtilities
 
     private function sendSubscriptionReminders()
     {
-        $subscriptionsEndingSoon = MemberSubscription::whereDate('finished_at', '=', Carbon::now()->addDays(3))->get();
+        $subscriptionsEndingSoon = CardPayment::whereDate('finished_at', '=', Carbon::now()->addDays(3))->get();
 
         foreach ($subscriptionsEndingSoon as $subscription) {
             $user = $subscription->user;
@@ -40,7 +41,7 @@ class FunctionUtilities
 
     private function sendLastWarnings()
     {
-        $subscriptionsEndingToday = MemberSubscription::whereDate('finished_at', '=', Carbon::now())->get();
+        $subscriptionsEndingToday = CardPayment::whereDate('finished_at', '=', Carbon::now())->get();
 
         foreach ($subscriptionsEndingToday as $subscription) {
             $user = $subscription->user;
@@ -62,7 +63,7 @@ class FunctionUtilities
 
     private function deactivateExpiredSubscriptions()
     {
-        $expiredSubscriptions = MemberSubscription::whereDate('finished_at', '<', Carbon::now()->subDay())->get();
+        $expiredSubscriptions = CardPayment::whereDate('finished_at', '<', Carbon::now()->subDay())->get();
 
         foreach ($expiredSubscriptions as $subscription) {
             $user = $subscription->user;
