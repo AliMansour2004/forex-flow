@@ -17,9 +17,9 @@ class FunctionUtilities
         });
     }
 
-    private function sendSubscriptionReminders()
+    private function sendSubscriptionReminders(): void
     {
-        $subscriptionsEndingSoon = CardPayment::whereDate('finished_at', '=', Carbon::now()->addDays(3))->get();
+        $subscriptionsEndingSoon = CardPayment::whereDate('finished_at', Carbon::now()->addDays(3))->get();
 
         foreach ($subscriptionsEndingSoon as $subscription) {
             $user = $subscription->user;
@@ -39,9 +39,10 @@ class FunctionUtilities
         }
     }
 
-    private function sendLastWarnings()
+    private function sendLastWarnings(): void
     {
-        $subscriptionsEndingToday = CardPayment::whereDate('finished_at', '=',Carbon::tomorrow())->get();
+        $subscriptionsEndingToday = CardPayment::whereDate('finished_at', Carbon::tomorrow())->get();
+
 
         foreach ($subscriptionsEndingToday as $subscription) {
             $user = $subscription->user;
@@ -61,9 +62,9 @@ class FunctionUtilities
         }
     }
 
-    private function deactivateExpiredSubscriptions()
+    private function deactivateExpiredSubscriptions(): void
     {
-        $expiredSubscriptions = CardPayment::whereDate('finished_at', '<', Carbon::now()->subDay())->get();
+        $expiredSubscriptions = CardPayment::whereDate('finished_at', Carbon::yesterday())->get();
 
         foreach ($expiredSubscriptions as $subscription) {
             $user = $subscription->user;
@@ -78,7 +79,7 @@ class FunctionUtilities
         }
     }
 
-    public function checkUserSubscriptions()
+    public function checkUserSubscriptions(): void
     {
         $this->sendSubscriptionReminders();
         $this->sendLastWarnings();
