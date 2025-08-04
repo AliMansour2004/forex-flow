@@ -49,14 +49,14 @@ class FunctionUtilities
 
             if ($user) {
                 $userMessage = "Hello {$user->first_name} {$user->last_name},\n\n"
-                    . "This is your final reminder that your subscription ends tomorrow ({$subscription->finished_at}). "
+                    . "This is your last reminder that your subscription ends tomorrow ({$subscription->finished_at}). "
                     . "Please renew it as soon as possible to avoid any disruption in service.\n\n"
                     . "Thank you for being with us.\n\nBest Regards,\nYour Team";
 
-                $this->sendEmail($userMessage, $user->email, 'Final Subscription Warning');
+                $this->sendEmail($userMessage, $user->email, 'Last Subscription Warning');
 
-                $adminMessage = "Final Warning:\n\nThe subscription for user {$user->first_name} {$user->last_name} (Email: {$user->email}) "
-                    . "ends today ({$subscription->finished_at}). Follow up if needed.";
+                $adminMessage = "Last Warning:\n\nThe subscription for user {$user->first_name} {$user->last_name} (Email: {$user->email}) "
+                    . "ends tomorrow ({$subscription->finished_at}). Follow up if needed.";
                 $this->sendEmail($adminMessage, 'forexflowteam@gmail.com', 'Final Subscription Warning');
             }
         }
